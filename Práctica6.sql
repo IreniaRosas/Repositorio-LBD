@@ -3,10 +3,10 @@
 use RentaVideo
 select * from Película
 
-select COUNT(Nombre) from Película
+select * from Película
 where año > 2000
 
-select SUM(CopiasPorUnidad) from Película
+select SUM(CopiasPorUnidad) AS TotalCopias from Película
 
 select MAX(PrecioPorUnidad) from Película
 
@@ -35,9 +35,10 @@ select COUNT(Id_Cliente) from Cliente
 
 select *from Empleado
 
-select MAX(FechaIngreso) from Empleado
+select Puesto, MAX(FechaIngreso) as EmpleadoNuevo from Empleado
+Group by Puesto
 
-select MIN(FechaIngreso) from Empleado
+select MIN(FechaIngreso) as EmpleadoAntiguo from Empleado
 
 
 
@@ -47,11 +48,12 @@ select *from Renta
 
 select SUM(Total_Articulos) from Renta
 
-select count(Precio_Total) from Renta
+select * from Renta
 where Precio_Total <250
 
-select COUNT(Id_Renta) from Renta
+select Empleado,COUNT(Id_Renta) as Rentas_realizadas from Renta
 where Empleado = 1001
+GROUP BY Empleado
 
 select Empleado, SUM(Total_Articulos) AS Peliculas_Vendidas from Renta
 GROUP BY Empleado
